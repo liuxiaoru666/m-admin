@@ -1,11 +1,7 @@
 <template>
   <el-card class="card">
     <!-- //面包屑  -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item to="/">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <m-brand level1='用户管理' level2='用户列表'></m-brand>
     <!-- 搜索框 -->
     <el-row class="search">
       <el-input placeholder="请输入内容" v-model="inputVal" class="searchInput">

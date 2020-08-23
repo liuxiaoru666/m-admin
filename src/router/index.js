@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../layout/index.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -11,15 +11,15 @@ const routes = [
     children:[
       {path: 'user',
       name: 'user',
-      component: () => import(/* webpackChunkName: "about" */ '@/components/user/User.vue')
+      component: () => import(/* webpackChunkName: "about" */ '@/views/user/User.vue')
      },
      {path: 'rightList',
       name: 'rightList',
-      component: () => import(/* webpackChunkName: "about" */ '@/components/rights/right.vue')
+      component: () => import(/* webpackChunkName: "about" */ '@/views/rights/right.vue')
      },
      {path: 'role',
       name: 'role',
-      component: () => import(/* webpackChunkName: "about" */ '@/components/rights/role.vue')
+      component: () => import(/* webpackChunkName: "about" */ '@/views/rights/role.vue')
      }
     ]
   },
