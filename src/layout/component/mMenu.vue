@@ -4,7 +4,19 @@
         <i class="el-icon-menu"></i>
         <span slot="title">首页</span>
       </el-menu-item>
-    <el-submenu index="1">
+      <el-submenu v-for="item in menuData" :key='item.label' :index='item.order'>
+        <template slot="title">
+        <i class="el-icon-location"></i>
+        <span>{{item.label}}</span>
+      </template>
+        <el-menu-item v-for = 'item1 in item.children' :key = 'item1.label' :index="item1.path">
+          <template slot="title">
+            <i class="el-icon-setting"></i>
+            <span>{{item1.label}}</span>
+          </template>
+        </el-menu-item>
+      </el-submenu>
+    <!-- <el-submenu index="1">
       <template slot="title">
         <i class="el-icon-location"></i>
         <span>用户管理</span>
@@ -81,13 +93,13 @@
           <span>统计报表</span>
         </template>
       </el-menu-item>
-    </el-submenu>
+    </el-submenu> -->
   </el-menu>
 </template>
 
 <script>
 export default {
-
+  props:['menuData']
 };
 </script>
 <style style="scoped">

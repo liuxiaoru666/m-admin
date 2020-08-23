@@ -11,7 +11,7 @@
 ### 登录/登出 `Login`
 
 - 调用接口登录成功后保存 token
-- 在组件渲染之前先校验 token，token 失效或者未登录重定向到登录
+- 在路由导航中校验token，token失效或者未登录重定向到登录
 - 调用退出接口，退出成功退出登录清除 token，跳转登录页
 
 ### 整体布局`Home`
@@ -60,7 +60,7 @@
 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
         </template>
       </el-table-column>
-//3、对字段进行格式化,类似filter
+//3、对字段进行格式化formatter,类似filter
 <el-table-column  label="用户状态" align='center' :formatter="statusFormat"> 
       </el-table-column>
 
@@ -69,3 +69,8 @@
 ### request封装
 axios二次封装
 封装api
+
+### 权限管理
+- 权限视图：行列关系，转换for循环
+
+- 修改权限tree树：递归组件

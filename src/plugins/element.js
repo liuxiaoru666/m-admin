@@ -26,7 +26,9 @@ import {
     Popconfirm,
     Dialog,
     Select,
-    Option
+    Option,
+    Tag,
+    Tree
 } from 'element-ui'
 
 Vue.use(Button)
@@ -53,5 +55,7 @@ Vue.use(Popconfirm)
 Vue.use(Dialog)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Tag)
+Vue.use(Tree)
 Vue.prototype.$message = Message;
 Vue.prototype.$messageBox = MessageBox;
