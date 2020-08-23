@@ -27,7 +27,7 @@ const routes = [
     path: '/login',
     name: 'login',
     //lazyLoad
-    component: () => import(/* webpackChunkName: "about" */ '@/components/login/Login.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/views/login/Login.vue')
   }
 ]
 

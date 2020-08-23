@@ -21,6 +21,7 @@
   </div>
 </template>
 <script>
+import {login} from '@/api/user.js';
 export default {
   name: "Login",
   data() {
@@ -46,10 +47,10 @@ export default {
       });
     },
     async goLogin() {
-      // var result =  await this.$axios.post('/login',this.formData);
-      // cosnole.log(result,1)
-
+      //  var result =  await login(this.formData);
+      
       if (this.formData.account === "lxr") {
+       
         //登录成功保存token
         localStorage.setItem('token','yterytetyeyteri')
         this.$message.success("登录成功");

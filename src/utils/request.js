@@ -1,17 +1,47 @@
 import axios from 'axios';
 import Vue from 'vue';
+import { MessageBox, Message } from 'element-ui'
+//实例化axios
+const service = axios.create({
+    baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+    // withCredentials: true, // 跨域携带cookie
+    timeout: 20 * 1000 //超时
+})
 
-//baseURL
-axios.defaults.baseURL='http://localhost:8080/'
-//拦截器
-axios.interceptors.request.use(function(config){
-    //请求发起之前
+//请求拦截
+service.interceptors.request.use((config)=>{
     const token = localStorage.getItem('token');
-    //不是登录请求，header添加token
-   if(token){
-    config.headers['token'] = token;
-   }
-    
+    if (token) {
+        config.headers['X-Token'] = token;//每个请求携带token
+      }
+      return config
+},err=>{
+    return Promise.reject(err)
+})
+
+//响应拦截
+service.interceptors.response.use(response=>{
+    const res = response.data;
+    if(res.code==200){
+        return res;
+    }else if(res.code==403){
+        //去登录
+    }else{
+        Message({
+            message:res.message||Error,
+            duration:2000
+        })
+    }
+
+
+},error=>{
+    Message({
+        message: error.message,
+        type: 'error',
+        duration: 5 * 1000
+      })
+    return Promise.reject(error)
 })
 
 
+export default service;
