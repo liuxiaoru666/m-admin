@@ -37,6 +37,14 @@ export default {
       }
     };
   },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
+    }
+  },
   methods: {
     checkPram(formName) {
       var that = this;
@@ -54,7 +62,7 @@ export default {
         //登录成功保存token
         localStorage.setItem('token','yterytetyeyteri')
         this.$message.success("登录成功");
-        this.$router.push({ name: "home" });
+        this.$router.push({ path: this.redirect || '/' })
       } else {
         this.$message.error("账号不存在！");
       }

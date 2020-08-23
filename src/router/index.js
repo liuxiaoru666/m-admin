@@ -1,14 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../layout/index.vue'
+
+//解决el-menu重定向报错问题
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'home',
+    redirect: '/indexPage',
     component: Home,
     children:[
+      {path: 'indexPage',
+      name: 'indexPage',
+      component: () => import(/* webpackChunkName: "about" */ '@/views/indexPage.vue')
+     },
       {path: 'user',
       name: 'user',
       component: () => import(/* webpackChunkName: "about" */ '@/views/user/User.vue')
@@ -37,6 +49,6 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach
+
 
 export default router
