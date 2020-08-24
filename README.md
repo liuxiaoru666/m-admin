@@ -71,6 +71,46 @@ axios二次封装
 封装api
 
 ### 权限管理
-- 权限视图：行列关系，转换for循环
+```javascript
+//1、通用创建路由表
+//如首页和登录页和一些不用权限的公用页面
+export const routerMap = [
+    //hidden为自定义属性，用于侧边栏显示
+    {
+        path: '/login',
+        component: Login,
+        hidden: true
+    },
+    {
+        path: '/',
+        component: Layout,
+        redirect: '/dashboard',
+        name: '首页',
+        children: [{
+            path: 'dashboard',
+            component: dashboard
+        }]
+    },
+]
+//2、异步路由表，根据权限加载
+export const asyncRouterMap = [{
+        path: '/Permission',
+        component: Layout,
+        redirect: '/Permission/index',
+        children: [{
+            path: 'index',
+            component: Permission,
+            name: 'Permission',
+            meta: {
+                roles: ['m1', 'p1', 'g1']
+            }
+        }]
+    },
+    {
+        path: '*',
+        redirect: '/404',
+        hidden: true
+    }
+];
 
-- 修改权限tree树：递归组件
+```
