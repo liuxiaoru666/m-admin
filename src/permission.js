@@ -11,9 +11,11 @@ router.beforeEach(async(to,from,next)=>{
     if(to.name==='login'){
         next({ path: '/' })
     }else{
-        //有token去其他页面正常
+        //获取用户信息，得到权限
+    
         next();
     }
+    //no token
  }else{
      //跳转白名单页不需要token验证
      if(whiteList.indexOf(to.path)!==-1){

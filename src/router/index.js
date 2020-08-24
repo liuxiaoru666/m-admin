@@ -9,8 +9,8 @@ VueRouter.prototype.push = function push(location) {
 }
 
 Vue.use(VueRouter)
-
-const routes = [
+//通用路由表
+export const constanceRoutes = [
   {
     path: '/',
     name: 'home',
@@ -20,18 +20,6 @@ const routes = [
       {path: 'indexPage',
       name: 'indexPage',
       component: () => import(/* webpackChunkName: "about" */ '@/views/indexPage.vue')
-     },
-      {path: 'user',
-      name: 'user',
-      component: () => import(/* webpackChunkName: "about" */ '@/views/user/User.vue')
-     },
-     {path: 'rightList',
-      name: 'rightList',
-      component: () => import(/* webpackChunkName: "about" */ '@/views/rights/right.vue')
-     },
-     {path: 'role',
-      name: 'role',
-      component: () => import(/* webpackChunkName: "about" */ '@/views/rights/role.vue')
      }
     ]
   },
@@ -43,12 +31,29 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
+export default new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes:constanceRoutes
 })
 
 
+//异步路由表，根据权限加载
+export const asyncRouterMap=[
+      {path: '/user',
+       name: 'user',
+       component: () => import(/* webpackChunkName: "about" */ '@/views/user/User.vue')
+     },
+     {path: '/rightList',
+      name: 'rightList',
+      component: () => import(/* webpackChunkName: "about" */ '@/views/rights/right.vue')
+     },
+     {path: '/role',
+      name: 'role',
+      component: () => import(/* webpackChunkName: "about" */ '@/views/rights/role.vue')
+     }
+]
 
-export default router
+
+
+// export default router

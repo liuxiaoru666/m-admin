@@ -71,46 +71,7 @@ axios二次封装
 封装api
 
 ### 权限管理
-```javascript
-//1、通用创建路由表
-//如首页和登录页和一些不用权限的公用页面
-export const routerMap = [
-    //hidden为自定义属性，用于侧边栏显示
-    {
-        path: '/login',
-        component: Login,
-        hidden: true
-    },
-    {
-        path: '/',
-        component: Layout,
-        redirect: '/dashboard',
-        name: '首页',
-        children: [{
-            path: 'dashboard',
-            component: dashboard
-        }]
-    },
-]
-//2、异步路由表，根据权限加载
-export const asyncRouterMap = [{
-        path: '/Permission',
-        component: Layout,
-        redirect: '/Permission/index',
-        children: [{
-            path: 'index',
-            component: Permission,
-            name: 'Permission',
-            meta: {
-                roles: ['m1', 'p1', 'g1']
-            }
-        }]
-    },
-    {
-        path: '*',
-        redirect: '/404',
-        hidden: true
-    }
-];
-
-```
+- 创建vue实例的时候将vue-router挂载，但这个时候vue-router挂载一些登录或者不用权限的公用的页面。
+- 当用户登录后，获取用roles/types,将roles/types和路由表/按钮视图表进行权限作比较，生成最终用户可访问的路由表和按钮视图表。
+- 调用router.addRoutes(store.getters.addRouters)添加用户可访问的路由，和使用自定义指令 v-permission控制按钮视图
+- 使用vuex管理路由表和按钮视图表。
