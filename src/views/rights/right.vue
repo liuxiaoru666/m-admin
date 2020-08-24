@@ -39,7 +39,6 @@ data(){
 },
  methods:{
     levelFormatter(r){
-      console.log(r)  
       return this.levelMap[r.level]
     }
   }

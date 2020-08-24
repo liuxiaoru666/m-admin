@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../layout/index.vue'
+import Layout from '../layout/index.vue'
 
 //解决el-menu重定向报错问题
 const originalPush = VueRouter.prototype.push;
@@ -15,7 +15,7 @@ export const constanceRoutes = [
     path: '/',
     name: 'home',
     redirect: '/indexPage',
-    component: Home,
+    component: Layout,
     children:[
       {path: 'indexPage',
       name: 'indexPage',
@@ -40,17 +40,34 @@ export default new VueRouter({
 
 //异步路由表，根据权限加载
 export const asyncRouterMap=[
-      {path: '/user',
-       name: 'user',
-       component: () => import(/* webpackChunkName: "about" */ '@/views/user/User.vue')
-     },
-     {path: '/rightList',
-      name: 'rightList',
-      component: () => import(/* webpackChunkName: "about" */ '@/views/rights/right.vue')
-     },
-     {path: '/role',
-      name: 'role',
-      component: () => import(/* webpackChunkName: "about" */ '@/views/rights/role.vue')
+     { name:'home',
+       path:'/',
+       redirect: '/indexPage',
+       component:Layout,
+       children:[
+        {path: '/user',
+        name: 'user',
+        component: () => import('@/views/user/User.vue'),
+        meta:{
+          btnPermission:[1,2,3]//按钮权限
+        }
+      },
+      {path: '/rightList',
+       name: 'rightList',
+       component: () => import('@/views/rights/right.vue'),
+       meta:{
+        btnPermission:[1,2,3]
+      }
+      },
+      {path: '/role',
+       name: 'role',
+       component: () => import('@/views/rights/role.vue'),
+       meta:{
+        btnPermission:[1,2,3]
+      }
+      }
+       ]
+    
      }
 ]
 
