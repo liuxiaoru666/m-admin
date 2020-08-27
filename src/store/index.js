@@ -1,11 +1,10 @@
 import vuex from 'vuex';
 import Vue from 'vue';
-import {constanceRoutes,asyncRouterMap} from '../router';
+// import {constanceRoutes,asyncRouterMap} from '../router';
 
  Vue.use(vuex);
 
  const state={
-    addRoutes:asyncRouterMap
  };
 
  const mutations={
