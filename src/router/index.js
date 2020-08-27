@@ -36,6 +36,11 @@ export const constanceRoutes = [
       import(/* webpackChunkName: "about" */ "@/views/login/Login.vue")
   },
   {
+    path: '/404',
+    component: () => import('@/views/404'),
+    hidden: true
+  },
+  {
     name: "user",
     path: "/user",
     redirect: "/user/userList",
@@ -134,7 +139,9 @@ export const constanceRoutes = [
         }
       }
     ]
-  }
+  },
+  { path: '*', redirect: '/404', hidden: true }
+  
 ];
 
 export default new VueRouter({
